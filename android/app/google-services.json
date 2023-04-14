@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "646565776005",
+    "project_id": "khoroga-ab3aa",
+    "storage_bucket": "khoroga-ab3aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646565776005:android:be9720f97e2afe594777ec",
+        "android_client_info": {
+          "package_name": "com.example.khoroga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646565776005-l4krmnab2778u15rgv6ejtis2betsd2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.khoroga",
+            "certificate_hash": "2db2bcd3940bfa0e860df50fdc86304485321182"
+          }
+        },
+        {
+          "client_id": "646565776005-hcnd9k0mgphtedcu7lce9pit9qiuf1ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaPcAKdemb1ptBkHpP0jwOs5CbNUeoN54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646565776005-hcnd9k0mgphtedcu7lce9pit9qiuf1ti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
