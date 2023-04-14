@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khoroga/view/auth/login_screen.dart';
 //kosomak
+//kosomin ahlak
 void main(){
   runApp(const MyApp());
 }
