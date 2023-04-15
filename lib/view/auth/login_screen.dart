@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:khoroga/constant.dart';
+import 'package:khoroga/core/view_model/auth_view_model.dart';
 import 'package:khoroga/view/widgets/custom_button.dart';
 import 'package:khoroga/view/widgets/custom_text.dart';
 import 'package:khoroga/view/widgets/custom_text_form_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetWidget<AuthViewModel> {
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
 
        backgroundColor: primaryColor ,
@@ -86,10 +88,15 @@ class LoginScreen extends StatelessWidget {
            const SizedBox(height: 20,),
            const CustomText(text: "------OR------",
             alignment: Alignment.center,),
-            const SizedBox(height: 40,),
+            Expanded(
+              child: Container(
+              ),
+            ),
             ElevatedButton(
               style: flatButtonStyle2,
-              onPressed: (){},
+              onPressed: (){
+                controller.googleSignInMethod();
+              },
               child: Row(
                 children: [
                   Image.asset('assets/images/google.png'),
