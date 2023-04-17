@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:khoroga/model/user_model.dart';
 import 'package:khoroga/view/home_view.dart';
+
+import '../../service/firestore_user.dart';
 
 class AuthViewModel extends GetxController{
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes:['email']);
@@ -49,7 +52,10 @@ class AuthViewModel extends GetxController{
         accessToken:googleSignInAuthentication.accessToken
     );
 
-   await _auth.signInWithCredential(credential);
+   await _auth.signInWithCredential(credential).then((user)async {
+       saveUser(user);
+       Get.offAll(()=>HomeView());
+      } );
 
   }
   void facebookSignInMethod() async {
@@ -57,7 +63,10 @@ class AuthViewModel extends GetxController{
     final accessToken= result.accessToken!.token;
     if(result.status==FacebookLoginStatus.success){
       final faceCredential= FacebookAuthProvider.credential(accessToken);
-      await _auth.signInWithCredential(faceCredential);
+      await _auth.signInWithCredential(faceCredential).then((user)async {
+       saveUser(user);
+       Get.offAll(()=>HomeView());
+      } );
     }
   }
   void signInWithEmailAndPassword() async{
@@ -74,11 +83,25 @@ class AuthViewModel extends GetxController{
   void createAccountWithEmailAndPassword() async{
 
     try{
-      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user)async {
+       saveUser(user);
+      } );
+     
+           
       Get.offAll(()=>HomeView());
     }catch(e){
         Get.snackbar("Error", "User does not exist", colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
     }
 
+  }
+
+  void saveUser(UserCredential user)async{
+    await FireStoreUser().addUserToFireStore(UserModel(
+          userId: user.user!.uid,
+          email: user.user!.email,
+          name:name==null ? user.user!.displayName : name,
+          pic:'',
+
+    ));
   }
 }
