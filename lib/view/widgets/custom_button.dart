@@ -15,9 +15,9 @@ class CustomButton extends StatelessWidget {
 
   );
   final String text;
+  final Function onPressed;
 
-
-   CustomButton({Key? key, required this.text}) : super(key: key);
+   CustomButton({Key? key, required this.text, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

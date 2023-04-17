@@ -1,15 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:khoroga/view/home_view.dart';
 
 class AuthViewModel extends GetxController{
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes:['email']);
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FacebookLogin _facebookLogin= FacebookLogin();
+
+   String email= "";
+   String password="";
+   String name="";
+
+  Rxn<User> _user = Rxn<User>();
+
+  get user => _user.value?.email;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    user?.bindStream(_auth.authStateChanges());
   }
 
   @override
@@ -34,8 +48,26 @@ class AuthViewModel extends GetxController{
         idToken:googleSignInAuthentication.idToken ,
         accessToken:googleSignInAuthentication.accessToken
     );
+
    await _auth.signInWithCredential(credential);
 
   }
+  void facebookSignInMethod() async {
+    FacebookLoginResult result =  await _facebookLogin.logIn();
+    final accessToken= result.accessToken!.token;
+    if(result.status==FacebookLoginStatus.success){
+      final faceCredential= FacebookAuthProvider.credential(accessToken);
+      await _auth.signInWithCredential(faceCredential);
+    }
+  }
+  void signInWithEmailAndPassword() async{
 
+    try{
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.offAll(HomeView());
+    }catch(e){
+        Get.snackbar("Error", "User does not exist", colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
+    }
+
+  }
 }

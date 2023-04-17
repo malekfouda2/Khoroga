@@ -5,8 +5,9 @@ import 'custom_text.dart';
 class CustomTextFormField extends StatelessWidget {
   final String text;
   final String hint;
-
-  const CustomTextFormField({Key? key, required this.text, required this.hint}) : super(key: key);
+  final  Function onSaved;
+  final Function validator;
+  const CustomTextFormField({Key? key, required this.text, required this.hint, required this.validator, required this.onSaved}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,10 @@ class CustomTextFormField extends StatelessWidget {
         color: Colors.grey.shade900,
       ),
       TextFormField(
-
+        onSaved: (String? value){},
+        validator: (String? value){},
         decoration: InputDecoration(
+
             hintText: hint,
             hintStyle: TextStyle(
                 color: Colors.grey

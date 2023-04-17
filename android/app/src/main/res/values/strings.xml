@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">khoroga</string>
+    <string name="facebook_app_id">112862381782383</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">4f608336b43104098ef069544d79c224</string>
+
+
+</resources>
