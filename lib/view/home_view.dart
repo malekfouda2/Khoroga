@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:khoroga/view/auth/login_screen.dart';
+import 'package:khoroga/view/auth/login_view.dart';
 class HomeView extends StatelessWidget {
   FirebaseAuth _auth = FirebaseAuth.instance;
    HomeView({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
           child: Text("Logout"),
           onPressed: (){
             _auth.signOut();
-            Get.offAll(LoginScreen());
+            Get.offAll(()=>LoginView());
           },
         ),
       ),

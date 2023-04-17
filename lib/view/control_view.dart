@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khoroga/core/view_model/auth_view_model.dart';
-import 'package:khoroga/view/auth/login_screen.dart';
+import 'package:khoroga/view/auth/login_view.dart';
 
 import 'home_view.dart';
 class ControlView extends GetWidget<AuthViewModel> {
@@ -12,7 +12,7 @@ class ControlView extends GetWidget<AuthViewModel> {
     return Obx((){
       return (Get.find<AuthViewModel>().user!=null)
           ? HomeView()
-          : LoginScreen();
+          : LoginView();
     });
   }
 }

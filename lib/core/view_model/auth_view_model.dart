@@ -64,7 +64,18 @@ class AuthViewModel extends GetxController{
 
     try{
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.offAll(HomeView());
+      Get.offAll(()=>HomeView());
+    }catch(e){
+        Get.snackbar("Error", "User does not exist", colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
+    }
+
+  }
+
+  void createAccountWithEmailAndPassword() async{
+
+    try{
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      Get.offAll(()=>HomeView());
     }catch(e){
         Get.snackbar("Error", "User does not exist", colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
     }

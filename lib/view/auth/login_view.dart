@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khoroga/constant.dart';
 import 'package:khoroga/core/view_model/auth_view_model.dart';
+import 'package:khoroga/view/auth/register_view.dart';
 import 'package:khoroga/view/widgets/custom_button.dart';
 import 'package:khoroga/view/widgets/custom_text.dart';
 import 'package:khoroga/view/widgets/custom_text_form_field.dart';
 
-class LoginScreen extends GetWidget<AuthViewModel> {
+class LoginView extends GetWidget<AuthViewModel> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
@@ -29,7 +30,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
     ),
 
   );
-   LoginScreen({Key? key}) : super(key: key);
+   LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +43,25 @@ class LoginScreen extends GetWidget<AuthViewModel> {
         padding: const EdgeInsets.only(top: 50, right: 20, left: 20),
         child: Form(
           key: formKey,
-          child: Column(
+          child: ListView(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:const [
+                children: [
                   CustomText(
                     text: "Welcome",
                     fontSize: 30,
                   ),
-                  CustomText(
-                    text: "Sign Up",
-                    color: primaryColor,
-                    fontSize: 18,
-
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(()=>RegisterView());
+                    },
+                    child: CustomText(
+                      text: "Sign Up",
+                      color: primaryColor,
+                      fontSize: 18,
+                  
+                    ),
                   ),
 
                 ],
