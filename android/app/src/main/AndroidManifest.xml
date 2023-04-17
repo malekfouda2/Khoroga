@@ -1,6 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.khorogaa">
    <application
-        android:label="khoroga"
+        android:label="khorogaa"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
