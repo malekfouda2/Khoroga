@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthViewModel extends GetxController{
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes:['email']);
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void onInit() {
@@ -27,6 +27,15 @@ class AuthViewModel extends GetxController{
   void googleSignInMethod()async{
     // final GoogleSignInAccount googleUser= 
     final GoogleSignInAccount? googleUser=await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication=
+    await googleUser!.authentication;
+
+    final AuthCredential credential= GoogleAuthProvider.credential(
+        idToken:googleSignInAuthentication.idToken ,
+        accessToken:googleSignInAuthentication.accessToken
+    );
+   await _auth.signInWithCredential(credential);
+
   }
 
 }
