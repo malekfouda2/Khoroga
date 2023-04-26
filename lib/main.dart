@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:khoroga/view/auth/login_view.dart';
 import 'package:get/get.dart';
 import 'package:khoroga/view/control_view.dart';
+import 'package:khoroga/view/home_view.dart';
 
 import 'helper/binding.dart';
 
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialBinding: Binding(),
       home: Scaffold(
-        body: ControlView(),
+        body: HomeView(),
       ),
     );
   }

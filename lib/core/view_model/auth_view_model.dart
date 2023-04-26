@@ -18,7 +18,7 @@ class AuthViewModel extends GetxController{
    String password="";
    String name="";
 
-  Rxn<User> _user = Rxn<User>();
+  final Rxn<User> _user = Rxn<User>();
 
   get user => _user.value?.email;
 

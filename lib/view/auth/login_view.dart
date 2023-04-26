@@ -125,6 +125,7 @@ class LoginView extends GetWidget<AuthViewModel> {
               controller.password= value!;
 
             },
+            obscureText:true,
             validator: ( value){
               if(value == null){
                 print("Error");
