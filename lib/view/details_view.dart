@@ -171,12 +171,12 @@ class DetailsView extends StatelessWidget {
     );
   }
   _launchMap() async{
-    final String googleMpasUrl="https://www.google.com/maps/dir/30.0444196,31.2357116/%D8%B3%D9%8A%D9%84%D8%A7%D8%B2+-+SeelaZ%E2%80%AD%E2%80%AD/@30.0512208,31.1989948,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14583dd0346e7759:0x951c650e33134315!2m2!1d31.4415766!2d30.0491635";
+    final String googleMpasUrl= model.location!;
     if (await canLaunchUrlString(googleMpasUrl)) {
       await launchUrlString(googleMpasUrl);
     }
       else{
-        throw " could not launch URL";
+        throw " could not launch $googleMpasUrl";
     }
 
   }
