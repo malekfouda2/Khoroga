@@ -23,6 +23,9 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: HomeView(),
       ),
+      theme: ThemeData(
+        fontFamily: 'SourceSans',
+      ),
     );
   }
 }

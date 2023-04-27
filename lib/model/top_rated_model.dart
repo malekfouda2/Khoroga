@@ -1,6 +1,6 @@
 class TopRatedModel{
-  String? image, name, branch,color;
-  TopRatedModel({required this.image,required this.name,required this.branch,required this.color,});
+  String? image, name, branch,color, location;
+  TopRatedModel({required this.image,required this.name,required this.branch,required this.color, required this.location});
 
   TopRatedModel.fromJson(Map<dynamic,dynamic> map){
     if(map==null){
@@ -10,6 +10,7 @@ class TopRatedModel{
     name=map['name'];
     branch=map['branch'];
     color=map['color'];
+    location= map['location'];
   }
 
   toJson(){
@@ -18,6 +19,7 @@ class TopRatedModel{
       'name':name,
       'branch':branch,
       'color':color,
+      'location':location,
     };
   }
 }
