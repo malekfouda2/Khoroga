@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../constant.dart';
+import '../utils/map_utils.dart';
 class DetailsView extends StatelessWidget {
   final TopRatedModel model ;
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
@@ -115,7 +116,7 @@ class DetailsView extends StatelessWidget {
                         width: 150,
                         child: ElevatedButton(
                             style: flatButtonStyle,
-                            onPressed: _launchMap,
+                            onPressed: (){MapUtils.openMap(model.lat!, model.lng!);},
                             // onPressed: ()async{
                             //   const url = "https://www.google.com";
                             //   if(await canLaunchUrlString(url)){
@@ -170,14 +171,5 @@ class DetailsView extends StatelessWidget {
       ),
     );
   }
-  _launchMap() async{
-    final String googleMpasUrl= model.location!;
-    if (await canLaunchUrlString(googleMpasUrl)) {
-      await launchUrlString(googleMpasUrl);
-    }
-      else{
-        throw " could not launch $googleMpasUrl";
-    }
-
-  }
+  
 }
