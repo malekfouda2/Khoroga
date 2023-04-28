@@ -17,10 +17,22 @@ class FavViewModel extends GetxController{
   }
 
   addPlace(FavPlaceModel favPlaceModel) async{
-    var dbHelper = FavDatabaseHelper.db;
-    await dbHelper.insert(favPlaceModel);
+
+      for(int i = 0 ; i< _favPlaceModel.length; i++){
+        if(_favPlaceModel[i].placeId == favPlaceModel.placeId){
+          Get.snackbar("Failed", "Place already Exists in favs!", colorText: Colors.red, snackPosition: SnackPosition.TOP);
+
+          return;
+        }
+    }
+      var dbHelper = FavDatabaseHelper.db;
+      await dbHelper.insert(favPlaceModel);
+      _favPlaceModel.add(favPlaceModel);
+      Get.snackbar("Success", "Place added to favorites!", colorText: primaryColor, snackPosition: SnackPosition.TOP);
+
+
+
     update();
-    Get.snackbar("Success", "Place added to favorites!", colorText: primaryColor, snackPosition: SnackPosition.TOP);
 
 
   }

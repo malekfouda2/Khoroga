@@ -163,7 +163,8 @@ class DetailsView extends StatelessWidget {
                               FavPlaceModel(
                                 name: model.name,
                                 image: model.image,
-                                branch: model.branch
+                                branch: model.branch,
+                                placeId: model.placeId
                               )
                             );
 

@@ -21,6 +21,7 @@ class FavDatabaseHelper{
         CREATE TABLE $tableFavPlace (
         $columnName TEXT NOT NULL,
         $columnImgae TEXT NOT NULL,
+        $columnBranch TEXT NOT NULL,
         $columnBranch TEXT NOT NULL)
       ''');
         }
