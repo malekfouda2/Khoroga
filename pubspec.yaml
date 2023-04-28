@@ -43,6 +43,8 @@ dependencies:
   flutter_login_facebook: ^1.8.0
   cloud_firestore: ^4.5.1
   url_launcher: ^6.1.10
+  sqflite: ^2.2.7
+  path: ^1.8.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

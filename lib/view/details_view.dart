@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:get/get.dart';
+import 'package:khoroga/core/view_model/fav_view_model.dart';
+import 'package:khoroga/model/fav_place_model.dart';
 import 'package:khoroga/model/top_rated_model.dart';
 import 'package:khoroga/view/widgets/custom_text.dart';
 import 'package:url_launcher/link.dart';
@@ -143,21 +146,33 @@ class DetailsView extends StatelessWidget {
                     ],
 
                   ),
-                  Container(
-                    padding:const EdgeInsets.all(20),
-                    height: 100,
-                    width: 150,
+                  GetBuilder<FavViewModel>(
+                    init: FavViewModel(),
+                    builder:(controller)=> Container(
+                      padding:const EdgeInsets.all(20),
+                      height: 100,
+                      width: 150,
 
-                    child: ElevatedButton(
+                      child: ElevatedButton(
 
 
-                        style: flatButtonStyle,
-                        onPressed: () {},
-                        child: const CustomText(
-                          text: "Favorite",
-                        )
+                          style: flatButtonStyle,
+                          onPressed: () {
+                            controller.addPlace(
+                              FavPlaceModel(
+                                name: model.name,
+                                image: model.image,
+                                branch: model.branch
+                              )
+                            );
+
+                          },
+                          child: const CustomText(
+                            text: "Favorite",
+                          )
+                      ),
+
                     ),
-
                   )
 
                 ],
