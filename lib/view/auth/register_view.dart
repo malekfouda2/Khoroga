@@ -89,7 +89,7 @@ class RegisterView extends GetWidget<AuthViewModel> {
               } ,
               decoration: InputDecoration(
           
-                  hintText: "Joe",
+                  hintText: "Your Name here",
                   hintStyle: TextStyle(
                       color: Colors.grey
                   ),

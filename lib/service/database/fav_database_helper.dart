@@ -22,7 +22,7 @@ class FavDatabaseHelper{
         $columnName TEXT NOT NULL,
         $columnImgae TEXT NOT NULL,
         $columnBranch TEXT NOT NULL,
-        $columnBranch TEXT NOT NULL)
+        $columnPlaceId TEXT NOT NULL)
       ''');
         }
     );
@@ -38,6 +38,19 @@ class FavDatabaseHelper{
       ? maps.map((place) =>FavPlaceModel.fromJson(place)).toList()
       : [];
   return list;
+  }
+   Future<void> cleanDatabase() async{
+    try{
+      final db = await database;
+      await db.transaction((txn)  async {
+        var batch= txn.batch();
+        batch.delete("FavPlace");
+
+        await batch.commit();
+      });
+    } catch(error){
+      throw Exception('DbBase.cleanDatabase: '+ error.toString());
+    }
   }
 
 }

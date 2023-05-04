@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: Binding(),
       home: Scaffold(
-        body: HomeView(),
+        body: LoginView(),
       ),
       theme: ThemeData(
         fontFamily: 'SourceSans',

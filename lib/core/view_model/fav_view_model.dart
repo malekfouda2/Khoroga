@@ -29,11 +29,11 @@ class FavViewModel extends GetxController{
       await dbHelper.insert(favPlaceModel);
       _favPlaceModel.add(favPlaceModel);
       Get.snackbar("Success", "Place added to favorites!", colorText: primaryColor, snackPosition: SnackPosition.TOP);
-
-
-
     update();
-
+  }
+  deletePlace() async{
+    var db= FavDatabaseHelper.db;
+    await db.cleanDatabase();
 
   }
 

@@ -18,7 +18,7 @@ class FavoritesView extends StatelessWidget {
 
   );
 
-  
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -74,14 +74,21 @@ class FavoritesView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-                Container(
-                  padding: EdgeInsets.all(20),
-                  height: 100,
-                  width: 150,
-                  child: ElevatedButton(onPressed: (){},
+                GetBuilder<FavViewModel>(
+                  init: FavViewModel(),
+                  builder: (controller) =>
+                     Container(
+                      padding: EdgeInsets.all(20),
+                      height: 100,
+                      width: 150,
+                      child: ElevatedButton(onPressed: (){
+                        controller.deletePlace();
+                      },
 
-                      style: flatButtonStyle,
-                        child: CustomText(text:"Delete All")),
+                          style: flatButtonStyle,
+                            child: CustomText(text:"Delete All")),
+                    ),
+
                 )
               ],
             ),
