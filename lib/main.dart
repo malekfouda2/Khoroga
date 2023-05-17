@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:khoroga/view/auth/login_view.dart';
 import 'package:get/get.dart';
+import 'package:khoroga/view/auth/register_view.dart';
 import 'package:khoroga/view/control_view.dart';
 import 'package:khoroga/view/home_view.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: Binding(),
       home: Scaffold(
-        body: LoginView(),
+        body: HomeView(),
       ),
       theme: ThemeData(
         fontFamily: 'SourceSans',

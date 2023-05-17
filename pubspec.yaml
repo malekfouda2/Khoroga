@@ -45,6 +45,10 @@ dependencies:
   url_launcher: ^6.1.10
   sqflite: ^2.2.7
   path: ^1.8.2
+  flutter_rating_bar: ^4.0.0
+  firebase_storage: ^11.1.2
+  image_picker: ^0.8.7+4
+  firebase_database: ^10.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

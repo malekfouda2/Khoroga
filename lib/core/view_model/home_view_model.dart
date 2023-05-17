@@ -40,7 +40,7 @@ class HomeViewModel extends GetxController{
         
         _loading.value=false;
       }
-      print(_top_ratedModel !.length);
+      // print(_top_ratedModel !.length);
       update();
     });
   }
