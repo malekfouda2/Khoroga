@@ -77,9 +77,6 @@ class DetailsView extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children:[
-                                const CustomText(
-                                text: 'Branch:'
-                              ),
                                 CustomText(
                                     text: model.branch!
                                 ),
