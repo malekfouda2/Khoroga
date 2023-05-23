@@ -180,9 +180,8 @@ class LoginView extends GetWidget<AuthViewModel> {
               color: Colors.black,
             ),
           ),
-             const SizedBox(height: 20,),
-             const CustomText(text: "------OR------",
-              alignment: Alignment.center,),
+             const SizedBox(height: 50,),
+             
               Expanded(
                 child: Container(
                 ),

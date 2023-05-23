@@ -13,13 +13,15 @@ import 'package:khoroga/view/widgets/custom_text.dart';
 
 import '../core/view_model/location_controller.dart';
 
+import '../model/category_model.dart';
+import 'categories_view.dart';
 class HomeView extends StatelessWidget {
   final LocationController locationController = Get.find<LocationController>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeViewModel>(
-        builder: (controller) =>controller.loading.value ? Center(child: CircularProgressIndicator()):
+        builder: (controller) =>
         Scaffold(
           bottomNavigationBar: const BottomBar(),
           body:SingleChildScrollView(
@@ -94,43 +96,65 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
-  Widget _listViewCategories(){
-    return GetBuilder<HomeViewModel>(
-        builder: (controller) {
-          return Container(
-            height: 100,
-            child: ListView.separated(
-              itemCount: controller.categoryModel!.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context,index){
-                return Column(
+  Widget _listViewCategories() {
+  return GetBuilder<HomeViewModel>(
+    builder: (controller) {
+      
+        return Container(
+          height: 100,
+          child: ListView.separated(
+            itemCount: controller.categoryModel!.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                        CategoryModel tappedCategory = controller.categoryModel![index];
+                        onTapCategory(tappedCategory);
+                      },
+                child: Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
+                    
+                      Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           color: Colors.white,
                           border: Border.all(
-                              color: Colors.black,
-                              width: 2
-                          )
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                        ),
+                        height: 60,
+                        width: 60,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.network(
+                            controller.categoryModel![index].image!,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                      height:60,
-                      width: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.network(controller.categoryModel![index].image!,fit: BoxFit.cover,),
-                      ),
-                    ),
-                    SizedBox(height: 20,),
-                    CustomText(text: controller.categoryModel![index].name!,)
+                    
+                    SizedBox(height: 20),
+                    CustomText(text: controller.categoryModel![index].name!),
                   ],
-                );
-              }, separatorBuilder: ( context, index)=> SizedBox(width: 20,)  ,
-            ),
-          );
-        }
-    );
-  }
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => SizedBox(width: 20),
+          ),
+        );
+      
+    },
+  );
+}
+
+void onTapCategory(CategoryModel category) {
+  Get.find<HomeViewModel>().fetchPlacesByCategory(category.name!);
+  Get.to(CategoryPage(categoryName: category.name!));
+}
+
+
+
   Widget _listViewTopRated(){
     return GetBuilder<HomeViewModel>(
         builder: (controller) {
