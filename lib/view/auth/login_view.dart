@@ -7,6 +7,8 @@ import 'package:khoroga/view/widgets/custom_button.dart';
 import 'package:khoroga/view/widgets/custom_text.dart';
 import 'package:khoroga/view/widgets/custom_text_form_field.dart';
 
+import '../../core/view_model/location_controller.dart';
+
 class LoginView extends GetWidget<AuthViewModel> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -35,19 +37,29 @@ class LoginView extends GetWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         elevation:0.0 ,
         backgroundColor: Colors.white,
+
       ),
+
       body: Padding(
+
         padding: const EdgeInsets.only(top: 50, right: 20, left: 20),
+
+
+
+
         child: Form(
           key: formKey,
           child: ListView(
             children: [
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
                   CustomText(
                     text: "Welcome",
                     fontSize: 30,
@@ -212,7 +224,9 @@ class LoginView extends GetWidget<AuthViewModel> {
 
           ),
         ),
+
       ),
+
     );
   }
 }

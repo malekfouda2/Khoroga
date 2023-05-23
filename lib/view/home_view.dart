@@ -10,7 +10,11 @@ import 'package:khoroga/view/details_view.dart';
 import 'package:khoroga/view/favorites_view.dart';
 import 'package:khoroga/view/widgets/bottom_bar.dart';
 import 'package:khoroga/view/widgets/custom_text.dart';
+
+import '../core/view_model/location_controller.dart';
+
 class HomeView extends StatelessWidget {
+  final LocationController locationController = Get.find<LocationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +51,24 @@ class HomeView extends StatelessWidget {
                       ],),
                     SizedBox(height: 20,),
                     _listViewTopRated(),
+                    SizedBox(height:20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        CustomText(
+                            text: "Top rated",
+                            fontSize: 18
+                        ),
+                        CustomText(
+                          text: "See all",
+                          fontSize: 16,
+                        )
+                      ],),
+                    SizedBox(height: 20,),
+                    _listViewNearby(),
+                    SizedBox(height:20),
+
+
 
                   ],
                 ),
@@ -161,7 +183,66 @@ class HomeView extends StatelessWidget {
           );
         }
     );
+
+  }
+  Widget _listViewNearby() {
+    return GetBuilder<LocationController>(
+      builder: (controller) {
+        return Container(
+          height: 350,
+          child: ListView.separated(
+            itemCount: controller.nearbyPlaces.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final place = controller.nearbyPlaces[index];
+              return GestureDetector(
+                onTap: () {
+                  // Handle onTap event
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * .4,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                        ),
+                        // child: Container(
+                        //   height: 220,
+                        //   width: MediaQuery.of(context).size.width * .4,
+                        //   decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //       image: NetworkImage(place.image),
+                        //       fit: BoxFit.fitHeight,
+                        //     ),
+                        //   ),
+                        // ),
+                      ),
+                      SizedBox(height: 3),
+                      CustomText(
+                        text: place.name,
+                        alignment: Alignment.bottomLeft,
+                      ),
+                      SizedBox(height: 5),
+                      CustomText(
+                        text: place.address,
+                        color: Colors.grey.shade500,
+                        alignment: Alignment.bottomLeft,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => SizedBox(width: 30),
+          ),
+        );
+      },
+    );
   }
 
 
+
 }
+
+
