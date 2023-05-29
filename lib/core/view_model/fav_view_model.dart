@@ -31,11 +31,21 @@ class FavViewModel extends GetxController{
       Get.snackbar("Success", "Place added to favorites!", colorText: primaryColor, snackPosition: SnackPosition.TOP);
     update();
   }
-  deletePlace() async{
-    var db= FavDatabaseHelper.db;
-    await db.cleanDatabase();
+  deletePlace() async {
+  var db = FavDatabaseHelper.db;
+  await db.cleanDatabase();
 
-  }
+  _favPlaceModel.clear(); // Clear the list after deleting from the database
+  update(); // Update the UI
+
+  Get.snackbar(
+    "Success",
+    "All places deleted from favorites!",
+    colorText: primaryColor,
+    snackPosition: SnackPosition.TOP,
+  );
+}
+
 
   getAllPlaces() async{
   _loading.value= true;
