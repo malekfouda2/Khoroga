@@ -246,7 +246,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
-<<<<<<< HEAD
   flutter_map:
     dependency: "direct main"
     description:
@@ -255,8 +254,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-=======
->>>>>>> 88ec71f3e13ff72af0ad111019bcff09a32e7959
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -265,8 +262,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.14"
-<<<<<<< HEAD
-=======
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -275,7 +270,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.1"
->>>>>>> 88ec71f3e13ff72af0ad111019bcff09a32e7959
   flutter_secure_storage:
     dependency: transitive
     description:
