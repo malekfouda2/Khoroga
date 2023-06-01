@@ -14,6 +14,7 @@ class PlaceModel{
     branch=map['branch'];
     color=map['color'];
     placeId= map['placeId'];
+    category=map['category'];
     lat= double.tryParse(map["lat"].toString());
     lng= double.tryParse(map["lng"].toString());
   }
@@ -24,6 +25,7 @@ class PlaceModel{
       'name':name,
       'branch':branch,
       'color':color,
+      'category':category,
       'lat':lat as double,
       'lng':lng as double,
       'placeId': placeId,

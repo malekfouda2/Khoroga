@@ -8,94 +8,107 @@ import '../constant.dart';
 
 class FavoritesView extends StatelessWidget {
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-
-    backgroundColor:Colors.red ,
-    //minimumSize: Size(88, 36),
+    backgroundColor: Colors.red,
     padding: const EdgeInsets.all(20),
     shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular((10))
+      borderRadius: BorderRadius.circular(10),
     ),
-
   );
-
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       bottomNavigationBar: const BottomBar(),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-
             child: GetBuilder<FavViewModel>(
               init: FavViewModel(),
-              builder:(controller)=> Container(
-                child: ListView.separated(itemBuilder:(context, index){
-                  return Container(
-                    height: 140,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 170,
-                            child: Image.network(controller.favPlaceModel[index].image!, fit: BoxFit.fill )
+              builder: (controller) => Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ListView.separated(
+                  itemCount: controller.favPlaceModel.length,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(height: 15),
+                  itemBuilder: (context, index) {
+                    final favPlace = controller.favPlaceModel[index];
+                    return InkWell(
+                      onTap: () {
+                        // Handle tap on the favorite place item
+                      },
+                      child: Card(
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30, top: 25),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
                             children: [
-                              CustomText(text: controller.favPlaceModel[index].name!,
-                                fontSize: 30,
+                              Container(
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    image: NetworkImage(favPlace.image!),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                              const SizedBox(height: 10,),
-                              CustomText(
-                                color: primaryColor,
-                                text: controller.favPlaceModel[index].branch!,
-                                fontSize: 20,
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      favPlace.name!,
+                                      style: const TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      favPlace.branch!,
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        color: primaryColor,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
                               ),
-
-
                             ],
                           ),
-                        )
-                      ],
-                    )
-                  );
-                } ,itemCount:controller.favPlaceModel.length, separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(height: 15,);
-                },),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                GetBuilder<FavViewModel>(
-                  init: FavViewModel(),
-                  builder: (controller) =>
-                     Container(
-                      padding: EdgeInsets.all(20),
-                      height: 100,
-                      width: 150,
-                      child: ElevatedButton(onPressed: (){
-                        controller.deletePlace();
-                      },
-
-                          style: flatButtonStyle,
-                            child: CustomText(text:"Delete All")),
-                    ),
-
-                )
-              ],
+            padding: const EdgeInsets.symmetric(horizontal: 125, vertical: 12),
+            child: GetBuilder<FavViewModel>(
+              init: FavViewModel(),
+              builder: (controller) => ElevatedButton(
+                onPressed: () {
+                  controller.deletePlace();
+                },
+                style: flatButtonStyle,
+                child: CustomText(text: "Delete All",color: Colors.white,),
+              ),
             ),
-          )
+          ),
         ],
       ),
-      
     );
   }
 }

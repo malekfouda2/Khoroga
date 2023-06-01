@@ -13,6 +13,7 @@ import 'package:khoroga/view/widgets/custom_text.dart';
 
 import '../core/view_model/location_controller.dart';
 
+import '../core/service/location_service.dart';
 import '../model/category_model.dart';
 import 'categories_view.dart';
 class HomeView extends StatelessWidget {
@@ -72,6 +73,19 @@ class HomeView extends StatelessWidget {
 
 
 
+                    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: const [
+        CustomText(
+          text: "Nearby Places",
+          fontSize: 18,
+        ),
+        
+      ],
+    ),
+    SizedBox(height: 20),
+    _listViewNearbyPlaces(),
+
                   ],
                 ),
               ),
@@ -82,6 +96,91 @@ class HomeView extends StatelessWidget {
 
     );
   }
+  Widget _listViewNearbyPlaces() {
+  return GetBuilder<LocationService>(
+    builder: (locationService) {
+      final List<dynamic>? nearbyPlaces = locationService.nearbyPlaces;
+
+      if (nearbyPlaces == null) {
+        return CircularProgressIndicator(); // Show a loading indicator while fetching nearby places
+      } else {
+        return Container(
+          height: 400,
+          child: ListView.separated(
+            itemCount: nearbyPlaces.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final place = nearbyPlaces[index];
+              final name = place['name'];
+              final vicinity = place['vicinity'] ?? 'Unknown';
+              final photos = place['photos'];
+
+              // Get the first photo reference and construct the image URL
+              String imageUrl = '';
+              if (photos != null && photos.length > 0) {
+                final photoReference = photos[0]['photo_reference'];
+                imageUrl =
+                    'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=${locationService.apiKey}';
+              }
+
+              return GestureDetector(
+                onTap: () {
+                  Get.to(DetailsView(model: place));
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * .4,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                        ),
+                        child: Container(
+                          height: 220,
+                          width: MediaQuery.of(context).size.width * .4,
+                          child: imageUrl.isNotEmpty
+                              ? Image.network(
+                                  imageUrl,
+                                  fit: BoxFit.fitHeight,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    // Placeholder icon when loading fails
+                                    return Icon(
+                                      Icons.photo,
+                                      size: 100,
+                                    );
+                                  },
+                                )
+                              : Icon(
+                                  Icons.photo,
+                                  size: 100,
+                                ),
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      CustomText(
+                        text: name,
+                        alignment: Alignment.bottomLeft,
+                      ),
+                      SizedBox(height: 5),
+                      CustomText(
+                        text: vicinity,
+                        color: Colors.grey.shade500,
+                        alignment: Alignment.bottomLeft,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => SizedBox(width: 30),
+          ),
+        );
+      }
+    },
+  );
+}
+
+
   Widget _searchFormField(){
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
@@ -159,7 +258,7 @@ void onTapCategory(CategoryModel category) {
     return GetBuilder<HomeViewModel>(
         builder: (controller) {
           return Container(
-            height: 350,
+            height: 300,
             child: ListView.separated(
               itemCount:controller.topRatedModel!.length,
               scrollDirection: Axis.horizontal,

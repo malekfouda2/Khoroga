@@ -86,11 +86,11 @@ class CategoryPage extends StatelessWidget {
                               topLeft: Radius.circular(8),
                               topRight: Radius.circular(8),
                             ),
-                            child: FadeInImage.assetNetwork(
-                              placeholder: 'assets/images/placeholder_image.jpg',
-                              image: place.image!,
-                              fit: BoxFit.cover,
-                            ),
+                            child: Image.network(
+  place.image!,
+  fit: BoxFit.cover,
+),
+
                           ),
                         ),
                         Padding(
