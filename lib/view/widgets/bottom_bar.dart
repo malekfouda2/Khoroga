@@ -24,8 +24,8 @@ class BottomBar extends StatelessWidget {
             icon: Icon(Icons.favorite)
             ),
             BottomNavigationBarItem(
-              label: "View Profile",
-            icon: Icon(Icons.account_circle)
+              label: "Collaboration",
+            icon: Icon(Icons.group_rounded)
             ),
         ],
         currentIndex: controller.navigatorValue,
